@@ -1,0 +1,22 @@
+name: Reader at Work 1 W
+slug: reader-at-work-1
+wordlists:
+  - name: 1 - 44
+    words:
+      - name: hello
+        meanings:
+          - en: merhaba
+            tr: ""
+  - name: 45 - 100
+    words:
+      - name: go
+        meanings:
+          - en: went
+            tr: git
+            type: verb
+            examples:
+              - en: go go go!
+                tr: 
+          - en: begin
+            tr: başla
+            type: verb
