@@ -9,7 +9,6 @@ class WordListScreenArgs {
 }
 
 class WordListScreen extends StatefulWidget {
-
   static final String route = "wordlist_screen";
 
   @override
@@ -17,12 +16,12 @@ class WordListScreen extends StatefulWidget {
 }
 
 class _WordListScreenState extends State<WordListScreen> {
-
   WordPack? wordpack;
 
   @override
   Widget build(BuildContext context) {
-    WordListScreenArgs args = ModalRoute.of(context)!.settings.arguments as WordListScreenArgs;
+    WordListScreenArgs args =
+        ModalRoute.of(context)!.settings.arguments as WordListScreenArgs;
     this.wordpack = args.wordPack;
 
     return Scaffold(
@@ -44,7 +43,8 @@ class _WordListScreenState extends State<WordListScreen> {
                     child: ListTile(
                       leading: Icon(Icons.list, size: 56.0),
                       title: Text(this.wordpack!.name),
-                      subtitle: Text("${this.wordpack!.wordlists.length} Wordlists"),
+                      subtitle:
+                          Text("${this.wordpack!.wordlists.length} Wordlists"),
                       onTap: () {
                         // Navigator.pushNamed(context, 'wordlist_screen');
                       },
