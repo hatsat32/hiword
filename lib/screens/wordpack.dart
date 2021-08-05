@@ -5,7 +5,6 @@ import 'package:hiword/models.dart';
 import 'package:hiword/core/wordreader.dart';
 
 class WordPackScreen extends StatefulWidget {
-
   static final String route = "wordpack_screen";
 
   @override
@@ -13,12 +12,11 @@ class WordPackScreen extends StatefulWidget {
 }
 
 class _WordPackScreenState extends State<WordPackScreen> {
-  final List<WordPack> wordpacks = [
-    WordPack("Reader At Work 1", "slug", [])
-  ];
+  List<WordPack> wordpacks = [];
 
-  void getData() async {
-    var words = await loadYamlFileSync('assets/reader_at_work_1.yml');
+  Future getData() async {
+    this.wordpacks = await loadWordPacks();
+    setState(() {});
   }
 
   @override
@@ -33,20 +31,26 @@ class _WordPackScreenState extends State<WordPackScreen> {
       appBar: appBarWidget,
       body: Center(
         child: ListView.builder(
-          itemCount: this.wordpacks.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: ListTile(
-                leading: Icon(Icons.list, size: 56.0),
-                title: Text(this.wordpacks[0].name),
-                subtitle: Text("${this.wordpacks[index].wordlists.length} Wordlists"),
-                onTap: () {
-                  Navigator.pushNamed(context, WordListScreen.route, arguments: this.wordpacks[index]);
-                },
-              ),
-            );
-          }
-        ),
+            itemCount: this.wordpacks.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                child: ListTile(
+                  leading: Icon(Icons.list, size: 56.0),
+                  title: Text(this.wordpacks[index].name),
+                  subtitle: Text(
+                    "${this.wordpacks[index].wordlists.length} Wordlists",
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      WordListScreen.route,
+                      arguments: WordListScreenArgs(wordPack: this.wordpacks[index]),
+                    );
+                    // Navigator.pushNamed(context, WordListScreen.route, arguments: {'wordpack': this.wordpacks[index]});
+                  },
+                ),
+              );
+            }),
       ),
     );
   }

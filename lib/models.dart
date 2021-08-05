@@ -1,16 +1,26 @@
 class WordPack {
   final String name;
   final String slug;
+  final String path;
+  final int count;
+
   final List<WordList> wordlists;
 
-  WordPack(this.name, this.slug, this.wordlists);
+  WordPack({
+    required this.name,
+    required this.slug,
+    required this.path,
+    required this.count,
+    required this.wordlists,
+  });
 }
 
 class WordList {
   final String name;
   final List<Word> words;
+  final int count;
 
-  WordList(this.name, this.words);
+  WordList(this.name, this.words, this.count);
 }
 
 class Word {

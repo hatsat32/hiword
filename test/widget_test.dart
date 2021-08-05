@@ -8,11 +8,13 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:hiword/main.dart';
+import 'package:hiword/screens/wordpack.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('main screen loads test', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
+    await tester.pumpAndSettle();
 
-    expect(find.text('Reader At Work 1'), findsOneWidget);
+    expect(find.text('Reader at Work 1'), findsOneWidget);
   });
 }
