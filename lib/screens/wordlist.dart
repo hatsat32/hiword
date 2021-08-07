@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:hiword/widgets.dart';
 import 'package:hiword/models.dart';
 import 'package:hiword/core/wordreader.dart';
+import 'package:hiword/screens/word.dart';
 
 class WordListScreenArgs {
   WordPack wordPack;
@@ -53,10 +54,15 @@ class _WordListScreenState extends State<WordListScreen> {
                       return Card(
                         child: ListTile(
                           leading: Icon(Icons.view_list, size: 56.0),
-                          title: Text(wp.name),
-                          subtitle: Text("${wp.wordlists.length} Wordlists"),
+                          title: Text(wp.wordlists[index].name),
+                          subtitle: Text("${wp.wordlists[index].count} words"),
                           onTap: () {
-                            // Navigator.pushNamed(context, 'wordlist_screen');
+                            Navigator.pushNamed(
+                              context,
+                              WordScreen.route,
+                              arguments:
+                                  WordScreenArgs(wordlist: wp.wordlists[index]),
+                            );
                           },
                         ),
                       );

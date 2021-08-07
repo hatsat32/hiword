@@ -20,3 +20,14 @@ wordlists:
           - en: begin
             tr: başla
             type: verb
+      - name: go
+        meanings:
+          - en: went
+            tr: git
+            type: verb
+            examples:
+              - en: go go go!
+                tr: 
+          - en: begin
+            tr: başla
+            type: verb
