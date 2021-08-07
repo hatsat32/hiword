@@ -64,10 +64,25 @@ class Word {
 class Meaning {
   final String? en;
   final String? tr;
+  List<Example> examples;
 
-  Meaning({this.en, this.tr});
+  Meaning({this.en, this.tr, this.examples: const []});
 
   factory Meaning.fromJson(Map<String, dynamic> json) {
-    return Meaning(en: json['en'], tr: json['tr']);
+    var list = json['examples'] as List;
+    List<Example> examples = list.map((i) => Example.fromJson(i)).toList();
+
+    return Meaning(en: json['en'], tr: json['tr'], examples: examples);
+  }
+}
+
+class Example {
+  final String? en;
+  final String? tr;
+
+  Example({this.en, this.tr});
+
+  factory Example.fromJson(Map<String, dynamic> json) {
+    return Example(en: json['en'], tr: json['tr']);
   }
 }
