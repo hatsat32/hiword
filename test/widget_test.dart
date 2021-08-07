@@ -8,7 +8,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:hiword/main.dart';
-import 'package:hiword/screens/wordpack.dart';
 
 void main() {
   testWidgets('main screen loads test', (WidgetTester tester) async {

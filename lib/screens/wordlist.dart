@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:hiword/widgets.dart';
 import 'package:hiword/models.dart';
+import 'package:hiword/core/wordreader.dart';
 
 class WordListScreenArgs {
   WordPack wordPack;
@@ -16,7 +17,7 @@ class WordListScreen extends StatefulWidget {
 }
 
 class _WordListScreenState extends State<WordListScreen> {
-  WordPack? wordpack;
+  late WordPack wordpack;
 
   @override
   Widget build(BuildContext context) {
@@ -27,33 +28,44 @@ class _WordListScreenState extends State<WordListScreen> {
     return Scaffold(
       appBar: appBarWidget,
       body: Center(
-        child: Column(
-          children: [
-            Row(
+        child: FutureBuilder(
+          future: loadWordPacksWordlists(args.wordPack),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              print("return CircularProgressIndicator();");
+              return CircularProgressIndicator();
+            }
+
+            WordPack wp = snapshot.data as WordPack;
+
+            return Column(
               children: [
-                Center(child: Text(this.wordpack!.name)),
+                Row(
+                  children: [
+                    Center(child: Center(child: Text(wp.name))),
+                  ],
+                ),
+                Center(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: wp.wordlists.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        child: ListTile(
+                          leading: Icon(Icons.view_list, size: 56.0),
+                          title: Text(wp.name),
+                          subtitle: Text("${wp.wordlists.length} Wordlists"),
+                          onTap: () {
+                            // Navigator.pushNamed(context, 'wordlist_screen');
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
-            ),
-            Center(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: this.wordpack!.wordlists.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    child: ListTile(
-                      leading: Icon(Icons.list, size: 56.0),
-                      title: Text(this.wordpack!.name),
-                      subtitle:
-                          Text("${this.wordpack!.wordlists.length} Wordlists"),
-                      onTap: () {
-                        // Navigator.pushNamed(context, 'wordlist_screen');
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

@@ -1,7 +1,7 @@
-import 'package:hiword/models.dart';
-import 'package:yaml/yaml.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:yaml/yaml.dart';
+import 'package:hiword/models.dart';
 
 Future<String> loadAsset(String path) async {
   return await rootBundle.loadString(path);
@@ -42,4 +42,9 @@ Future<List<WordPack>> loadWordPacks() async {
   });
 
   return wordPacks;
+}
+
+Future<WordPack> loadWordPacksWordlists(WordPack wordpack) async {
+  Map wordpackyaml = await loadYamlFile(wordpack.path!);
+  return WordPack.fromJson(json.decode(json.encode(wordpackyaml)));
 }

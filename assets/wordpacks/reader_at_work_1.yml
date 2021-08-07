@@ -20,3 +20,27 @@ wordlists:
           - en: begin
             tr: başla
             type: verb
+  - name: 45 - 100
+    words:
+      - name: go
+        meanings:
+          - en: went
+            tr: git
+            type: verb
+            examples:
+              - en: go go go!
+                tr: 
+          - en: begin
+            tr: başla
+            type: verb
+      - name: asdf
+        meanings:
+          - en: went
+            tr: git
+            type: verb
+            examples:
+              - en: go go go!
+                tr: 
+          - en: begin
+            tr: başla
+            type: verb

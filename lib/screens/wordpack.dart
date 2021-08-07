@@ -35,10 +35,10 @@ class _WordPackScreenState extends State<WordPackScreen> {
           itemBuilder: (BuildContext context, int index) {
             return Card(
               child: ListTile(
-                leading: Icon(Icons.list, size: 56.0),
+                leading: Icon(Icons.inventory_2, size: 56.0),
                 title: Text(this.wordpacks[index].name),
                 subtitle: Text(
-                  "${this.wordpacks[index].wordlists.length} Wordlists",
+                  "${this.wordpacks[index].count} Wordlists",
                 ),
                 onTap: () {
                   Navigator.pushNamed(
