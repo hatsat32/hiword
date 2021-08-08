@@ -4,8 +4,9 @@ import 'package:hiword/models.dart';
 
 class StudyScreenArgs {
   WordList wordlist;
+  int index;
 
-  StudyScreenArgs({required this.wordlist});
+  StudyScreenArgs({required this.wordlist, required this.index});
 }
 
 class StudyScreen extends StatefulWidget {
@@ -28,6 +29,7 @@ class _StudyScreenState extends State<StudyScreen> {
       appBar: appBarWidget,
       body: PageView.builder(
         itemCount: this.wordlist.count,
+        controller: PageController(initialPage: args.index),
         itemBuilder: (context, position) {
           return StudyWord(
             word: wordlist.words[position],
@@ -41,7 +43,11 @@ class _StudyScreenState extends State<StudyScreen> {
 }
 
 class StudyWord extends StatelessWidget {
-  const StudyWord({required this.word, required this.index, required this.total});
+  const StudyWord({
+    required this.word,
+    required this.index,
+    required this.total,
+  });
 
   final Word word;
   final int index;
@@ -51,48 +57,78 @@ class StudyWord extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
+        Card(
+          child: ListTile(
+            leading: ElevatedButton(
+              child: Text("${index + 1}/$total"),
+              onPressed: null,
+            ),
+            title: Text(
               word.name,
               style: TextStyle(
-                fontSize: 40,
+                fontSize: 30,
                 color: Colors.blueGrey.shade700,
               ),
             ),
-            Text("${index+1}/$total")
-          ],
+          ),
         ),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: word.meanings.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.view_list, size: 56.0),
-                    title: Text(word.meanings[index].en as String),
-                    subtitle: Text(word.meanings[index].tr as String),
-                  ),
-                  Text("Examples"),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: word.meanings[index].examples.length,
-                    itemBuilder: (BuildContext context, int index2) {
-                      return Card(
-                        child: ListTile(
-                          title: Text(word.meanings[index].examples[index2].en as String),
-                          subtitle: Text(word.meanings[index].examples[index2].tr as String),
-                        ),
-                      );
-                    },
-                  )
-                ],
-              ),
-            );
-          },
+        Expanded(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: word.meanings.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Column(
+                  children: [
+                    /**
+                     * word name
+                     */
+                    ListTile(
+                      leading: Icon(Icons.bookmark, size: 36.0),
+                      title: Text(word.meanings[index].en as String),
+                      subtitle: Text(word.meanings[index].tr as String),
+                    ),
+
+                    /**
+                     * show divider if examples exist
+                     */
+                    Visibility(
+                      child: Divider(
+                          color: Colors.blueGrey.shade500, thickness: 1),
+                      visible: word.meanings[index].examples.length != 0,
+                    ),
+
+                    /**
+                     * examples
+                     */
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: word.meanings[index].examples.length,
+                      separatorBuilder: (_, __) => const Divider(
+                        height: 0,
+                        thickness: 1,
+                        indent: 10,
+                        endIndent: 10,
+                      ),
+                      itemBuilder: (BuildContext context, int index2) {
+                        return ListTile(
+                          dense: true,
+                          title: Text(
+                            word.meanings[index].examples[index2].en as String,
+                          ),
+                          subtitle: Text(
+                            word.meanings[index].examples[index2].tr as String,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         )
       ],
     );

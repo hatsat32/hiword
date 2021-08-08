@@ -29,29 +29,27 @@ class _WordPackScreenState extends State<WordPackScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarWidget,
-      body: Center(
-        child: ListView.builder(
-          itemCount: this.wordpacks.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: ListTile(
-                leading: Icon(Icons.inventory_2, size: 56.0),
-                title: Text(this.wordpacks[index].name),
-                subtitle: Text(
-                  "${this.wordpacks[index].count} Wordlists",
-                ),
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    WordListScreen.route,
-                    arguments:
-                        WordListScreenArgs(wordPack: this.wordpacks[index]),
-                  );
-                },
+      body: ListView.builder(
+        itemCount: this.wordpacks.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            child: ListTile(
+              leading: Icon(Icons.inventory_2, size: 56.0),
+              title: Text(this.wordpacks[index].name),
+              subtitle: Text(
+                "${this.wordpacks[index].count} Wordlists",
               ),
-            );
-          },
-        ),
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  WordListScreen.route,
+                  arguments:
+                      WordListScreenArgs(wordPack: this.wordpacks[index]),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

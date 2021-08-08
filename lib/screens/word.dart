@@ -27,24 +27,28 @@ class _WordScreenState extends State<WordScreen> {
 
     return Scaffold(
       appBar: appBarWidget,
-      body: ListView.builder(
-        shrinkWrap: true,
-        itemCount: wordlist.words.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: ListTile(
-              leading: Icon(Icons.tag),
-              title: Text(wordlist.words[index].name),
+      body: Scrollbar(
+        hoverThickness: 24,
+        isAlwaysShown: true,
+        child: ListView.separated(
+          itemCount: wordlist.words.length,
+          separatorBuilder: (_, __) => Divider(
+            height: 0,
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              leading: ElevatedButton(child: Text(index.toString()), onPressed: null),
+              title: Text(wordlist.words[index].name, style: TextStyle(fontSize: 18)),
               onTap: () {
                 Navigator.pushNamed(
                   context,
                   StudyScreen.route,
-                  arguments: StudyScreenArgs(wordlist: wordlist),
+                  arguments: StudyScreenArgs(wordlist: wordlist, index: index),
                 );
               },
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

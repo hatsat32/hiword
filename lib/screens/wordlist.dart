@@ -28,50 +28,50 @@ class _WordListScreenState extends State<WordListScreen> {
 
     return Scaffold(
       appBar: appBarWidget,
-      body: Center(
-        child: FutureBuilder(
-          future: loadWordPacksWordlists(args.wordPack),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return CircularProgressIndicator();
-            }
+      body: Column(
+        children: [
+          Card(
+            child: Flexible(
+              child: Text(
+                wordpack.name,
+                overflow: TextOverflow.fade,
+                style: TextStyle(color: Colors.blueGrey[700], fontSize: 30),
+              ),
+            ),
+          ),
+          FutureBuilder(
+            future: loadWordPacksWordlists(args.wordPack),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return CircularProgressIndicator();
+              }
 
-            WordPack wp = snapshot.data as WordPack;
+              WordPack wp = snapshot.data as WordPack;
 
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    Center(child: Center(child: Text(wp.name))),
-                  ],
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: wp.wordlists.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      child: ListTile(
+                        leading: Icon(Icons.view_list, size: 56.0),
+                        title: Text(wp.wordlists[index].name),
+                        subtitle: Text("${wp.wordlists[index].count} words"),
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            WordScreen.route,
+                            arguments: WordScreenArgs(wordlist: wp.wordlists[index]),
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
-                Center(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: wp.wordlists.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        child: ListTile(
-                          leading: Icon(Icons.view_list, size: 56.0),
-                          title: Text(wp.wordlists[index].name),
-                          subtitle: Text("${wp.wordlists[index].count} words"),
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              WordScreen.route,
-                              arguments:
-                                  WordScreenArgs(wordlist: wp.wordlists[index]),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
