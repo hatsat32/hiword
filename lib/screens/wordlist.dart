@@ -31,10 +31,10 @@ class _WordListScreenState extends State<WordListScreen> {
       body: Column(
         children: [
           Card(
-            child: Flexible(
-              child: Text(
+            child: ListTile(
+              leading: Icon(Icons.inventory_2, size: 56),
+              title: Text(
                 wordpack.name,
-                overflow: TextOverflow.fade,
                 style: TextStyle(color: Colors.blueGrey[700], fontSize: 30),
               ),
             ),
