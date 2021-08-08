@@ -7,6 +7,10 @@ wordlists:
         meanings:
           - en: merhaba
             tr: ""
+            # examples:
+            #   - en: asdf
+            #     tr: ffff
+
   - name: 45 - 100
     words:
       - name: go
@@ -16,10 +20,13 @@ wordlists:
             type: verb
             examples:
               - en: go go go!
-                tr: 
+                tr: asdf
           - en: begin
             tr: başla
             type: verb
+            examples:
+              - en: go go go!
+                tr: asdf
       - name: go
         meanings:
           - en: went
@@ -27,7 +34,72 @@ wordlists:
             type: verb
             examples:
               - en: go go go!
-                tr: 
+                tr: asdf
           - en: begin
             tr: başla
             type: verb
+            examples:
+              - en: go go go!
+                tr: asdf
+      - name: go
+        meanings:
+          - en: went
+            tr: git
+            type: verb
+            examples:
+              - en: go go go!
+                tr: asdf
+          - en: begin
+            tr: başla
+            type: verb
+            examples:
+              - en: go go go!
+                tr: asdf
+      - name: go
+        meanings:
+          - en: went
+            tr: git
+            type: verb
+            examples:
+              - en: go go go!
+                tr: asdf
+          - en: begin
+            tr: başla
+            type: verb
+            examples:
+              - en: go go go!
+                tr: asdf
+      - name: go
+        meanings:
+          - en: went
+            tr: git
+            type: verb
+            examples:
+              - en: go go go!
+                tr: asdf
+          - en: begin
+            tr: başla
+            type: verb
+            examples:
+              - en: go go go!
+                tr: asdf
+              - en: go go go!
+                tr: asdf
+              - en: go go go!
+                tr: asdf
+              - en: go go go!
+                tr: asdf
+      - name: go
+        meanings:
+          - en: went
+            tr: git
+            type: verb
+            examples:
+              - en: go go go!
+                tr: asdf
+          - en: begin
+            tr: başla
+            type: verb
+            examples:
+              - en: go go go!
+                tr: asdf

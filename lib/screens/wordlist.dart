@@ -33,7 +33,6 @@ class _WordListScreenState extends State<WordListScreen> {
           future: loadWordPacksWordlists(args.wordPack),
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
-              print("return CircularProgressIndicator();");
               return CircularProgressIndicator();
             }
 

@@ -31,7 +31,7 @@ class WordPack {
 class WordList {
   final String name;
   final List<Word> words;
-  final int? count;
+  final int count;
 
   WordList({required this.name, required this.words, required this.count});
 
@@ -69,9 +69,8 @@ class Meaning {
   Meaning({this.en, this.tr, this.examples: const []});
 
   factory Meaning.fromJson(Map<String, dynamic> json) {
-    var list = json['examples'] as List;
+    List list = json['examples'] ?? [];
     List<Example> examples = list.map((i) => Example.fromJson(i)).toList();
-
     return Meaning(en: json['en'], tr: json['tr'], examples: examples);
   }
 }

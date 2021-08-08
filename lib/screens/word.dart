@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import "package:flutter/material.dart";
 import 'package:hiword/widgets.dart';
 import 'package:hiword/models.dart';
+import 'package:hiword/screens/study.dart';
 
 class WordScreenArgs {
   WordList wordlist;
@@ -25,7 +24,6 @@ class _WordScreenState extends State<WordScreen> {
     WordScreenArgs args =
         ModalRoute.of(context)!.settings.arguments as WordScreenArgs;
     this.wordlist = args.wordlist;
-    inspect(wordlist);
 
     return Scaffold(
       appBar: appBarWidget,
@@ -38,7 +36,11 @@ class _WordScreenState extends State<WordScreen> {
               leading: Icon(Icons.tag),
               title: Text(wordlist.words[index].name),
               onTap: () {
-                //
+                Navigator.pushNamed(
+                  context,
+                  StudyScreen.route,
+                  arguments: StudyScreenArgs(wordlist: wordlist),
+                );
               },
             ),
           );
