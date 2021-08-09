@@ -95,7 +95,8 @@ class StudyWord extends StatelessWidget {
                      */
                     Visibility(
                       child: Divider(
-                          color: Colors.blueGrey.shade500, thickness: 1),
+                        color: Colors.grey.shade800,
+                      ),
                       visible: word.meanings[index].examples.length != 0,
                     ),
 
